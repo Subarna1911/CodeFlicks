@@ -1,16 +1,20 @@
-import React from 'react';
-import  MovieFetcher from './components/MovieFetcher'
+import React from 'react'
+import{Routes,Route} from 'react-router-dom'
+import Home from './pages/Home'
+import Watchlist from './pages/WatchList'
+import Navbar from './components/Navbar'
 
-const App = () => {
 
-  
+export default function App() {
   return (
    <>
-   <div className="h-screen w-full flex items-center justify-center">
-    <MovieFetcher/>
-   </div>
+   <Navbar/>
+   <Routes>
+    <Route path='/' element = {<Home />} />
+    <Route path='/watchlist' element = {<Watchlist />} />
+   </Routes>
+
+
    </>
   )
 }
-
-export default App
