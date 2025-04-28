@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import MovieFetcher from "../components/MovieFetcher";
 
 export default function Home() {
-  const API_KEY = "69061c3bc111beb813a6c9947a016085";
-  const BASE_URL = "https://api.themoviedb.org/3";
+  const API_KEY = import.meta.env.VITE_API_KEY;
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState("");

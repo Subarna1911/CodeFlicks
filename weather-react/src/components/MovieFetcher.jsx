@@ -1,5 +1,5 @@
 import React from "react";
-import image from '../assets/cat.jpg'
+
 
 export default function MovieFetcher({movie}) {
 
