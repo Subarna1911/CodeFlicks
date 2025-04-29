@@ -5,6 +5,7 @@ import Watchlist from './pages/WatchList'
 import Navbar from './components/Navbar'
 import { MovieProvider } from './contexts/MovieContext'
 import MovieDetail from './pages/MovieDetails'
+import SearchBar from './components/SearchBar'
 
 
 export default function App() {

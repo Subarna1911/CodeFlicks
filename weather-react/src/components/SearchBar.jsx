@@ -1,4 +1,6 @@
 import React from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 
 export default function SearchBar({ query, onChange, onSubmit, suggestions, onSuggestionClick }) {
   return (
@@ -13,9 +15,9 @@ export default function SearchBar({ query, onChange, onSubmit, suggestions, onSu
         />
         <button
           type="submit"
-          className="bg-slate-950 text-white px-6 py-2 rounded-md hover:cursor-pointer  hover:bg-red-700"
+          className="absolute text-black px-4 py-3 rounded-md hover:cursor-pointer text-2xl  right-0"
         >
-          Search
+          <FontAwesomeIcon icon={faMagnifyingGlass} />
         </button>
       </form>
 

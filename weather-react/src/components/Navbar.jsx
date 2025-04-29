@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
+
 export default function Navbar() {
   return (
     <div className="sticky top-0 z-100">
@@ -12,6 +13,7 @@ export default function Navbar() {
             <li className="flex jsutify-center gap-4 text-lg font-bold">
                 <Link to ="/">Home</Link>
                 <Link to ="/watchlist">Watchlist</Link>
+               
             </li>
            
         </ul>
