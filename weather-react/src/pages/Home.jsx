@@ -1,131 +1,112 @@
 import React, { useEffect, useState } from "react";
-import MovieFetcher from "../components/MovieFetcher";
+import SearchBar from "../components/SearchBar";
+import GenreFilter from "../components/GenreFilter";
+import MovieGrid from "../components/MovieGrid";
+import {fetchPopularMovies,searchMovies,fetchGenres,filterMoviesByGenre,fetchMovieById} from "../services/api";
 
 export default function Home() {
-  const API_KEY = import.meta.env.VITE_API_KEY;
-  const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
+  const [genres, setGenres] = useState([]);
+  const [selectedGenre, setSelectedGenre] = useState("");
 
   const handleChange = async (e) => {
     const value = e.target.value;
     setQuery(value);
-
+  
     if (value.trim() === "") {
       setSuggestions([]);
       return;
     }
-
+  
     try {
-      const response = await fetch(
-        `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(
-          value
-        )}`
-      );
-      const data = await response.json();
-      setSuggestions(data.results || []);
+      const movieSuggestions = await searchMovies(value);
+      setSuggestions(movieSuggestions || []);
     } catch (error) {
       console.error("Failed to fetch suggestions", error);
     }
   };
-
+  
   const handleQuery = async (e) => {
     e.preventDefault();
     if (!query.trim()) return;
     setLoading(true);
     setSuggestions([]);
-
+  
     try {
-      const response = await fetch(
-        `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(
-          query
-        )}`
-      );
-      const data = await response.json();
-      setMovies(data.results || []);
+      const searchedMovies = await searchMovies(query);
+      setMovies(searchedMovies || []);
     } catch (error) {
       console.error("Failed to fetch movies", error);
     } finally {
       setLoading(false);
     }
   };
-
+  
   const handleSuggestionClick = (title) => {
     setQuery(title);
     setSuggestions([]);
   };
 
+  
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await fetch(
-          `${BASE_URL}/movie/popular?api_key=${API_KEY}`
-        );
-        const data = await response.json();
-        setMovies(data.results);
+        const popularMovies = await fetchPopularMovies(); 
+        setMovies(popularMovies);
       } catch (error) {
         console.error("Error fetching movies", error);
       }
     };
-
     fetchMovies();
   }, []);
 
+
+  useEffect(() => {
+    const fetchMovieGenres = async () => {
+      try {
+        const genresData = await fetchGenres();
+        setGenres(genresData);
+      } catch (error) {
+        console.error("Error fetching genres", error);
+      }
+    };
+  
+    fetchMovieGenres();
+  }, []);
+
+  const handleGenreChange = async (genreId) => {
+    setSelectedGenre(genreId);
+  
+    try {
+      const movies = await filterMoviesByGenre(genreId);
+      setMovies(movies);
+    } catch (error) {
+      console.error("Error filtering by genre", error);
+    }
+  };
+
+
   return (
     <>
-      <div className="relative w-full max-w-md mx-auto mt-8">
-        <form onSubmit={handleQuery} className="flex items-center gap-4">
-          <input
-            type="text"
-            onChange={handleChange}
-            value={query}
-            placeholder="Search for movies..."
-            className="flex-grow px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-gray-500"
-          />
-          <button
-            type="submit"
-            className="bg-slate-950 text-white font-semibold px-6 py-2 rounded-md border-2 border-transparent hover:border-slate-950 hover:bg-white hover:text-black transition duration-300"
-          >
-            Search
-          </button>
-        </form>
-
-        {suggestions.length > 0 && (
-          <ul className="absolute z-10 bg-white w-full border border-gray-300 mt-1 rounded-md max-h-60 overflow-y-auto shadow-lg">
-            {suggestions.map((movie) => (
-              <li
-                key={movie.id}
-                className="px-4 py-2 hover:bg-purple-100 cursor-pointer"
-                onClick={() => handleSuggestionClick(movie.title)}
-              >
-                {movie.title}
-              </li>
-            ))}
-          </ul>
-        )}
+      <div className="max-w-md mx-auto">
+        <GenreFilter genres={genres} onChange={handleGenreChange} />
+        <SearchBar
+          query={query}
+          onChange={handleChange}
+          onSubmit={handleQuery}
+          suggestions={suggestions}
+          onSuggestionClick={handleSuggestionClick}
+        />
       </div>
 
       {loading ? (
-        <p className="text-center mt-8 text-purple-600 font-semibold">
-          Loading...
-        </p>
-      ) : movies.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
-          {movies.map((movie) => (
-            <MovieFetcher
-              key={movie.id}
-              movie={movie}
-             
-            />
-          ))}
-        </div>
+        <p className="text-center mt-8 text-purple-600 font-semibold">Loading...</p>
       ) : (
-        <p className="text-center mt-8 text-gray-500 font-semibold">
-          No movies found. Please try a different search term. 🎯
-        </p>
+        <MovieGrid movies={movies} />
       )}
     </>
   );

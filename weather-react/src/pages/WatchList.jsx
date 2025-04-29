@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { useMovieContext } from '../contexts/MovieContext'
-import MovieFetcher from '../components/MovieFetcher'
+import MovieCard from '../components/MovieCard'
 
 
 export default function WatchList() {
@@ -13,7 +13,7 @@ export default function WatchList() {
       <h2 className = "text-3xl font-bold text-slate-950 text-center m-8">Here is the list of your favorite movies ❤</h2>
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
               {favorites.map((movie) => (
-                <MovieFetcher
+                <MovieCard
                   key={movie.id}
                   movie={movie}
                 />

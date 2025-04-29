@@ -3,8 +3,8 @@ import {Link} from 'react-router-dom'
 
 export default function Navbar() {
   return (
-    <div>
-        <nav className="bg-slate-950 text-white p-6 flex justify-between">
+    <div className="sticky top-0 z-100">
+        <nav className="bg-slate-950 text-white p-6 flex justify-between ">
             <div className="text-3xl font-bold">
                 <Link to='/'>CatFlex</Link>
             </div>
