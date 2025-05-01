@@ -17,26 +17,20 @@ export default function MovieCard({ movie }) {
 
   return (
     <Link to={`/movie/${movie.id}`} className="block">
-      <div className="bg-red-700 flex max-w-sm m-auto justify-center items-center rounded-lg text-white flex-col relative mt-8 shadow-2xl">
-        <button
-          onClick={onFavoriteClick}
-          className="absolute top-4 right-4 font-bold text-2xl"
-        >
-          {favorite ? "❤" : "🤍"}
-        </button>
-        <div>
-          <img
-            className="bg-center bg-no-repeat bg-cover rounded-b-0 rounded-t-md shadow-2xl"
-            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-            alt={movie.title}
-          />
-        </div>
-        <div className="p-6 max-h-[200px] text-lg">
-          <h1 className="font-bold text-lg uppercase">{movie.title}</h1>
-          <p className="font-medium">{movie.release_date}</p>
-          <p className="my-2">⭐ {movie.vote_average}/10</p>
-        </div>
-      </div>
+  <div className="relative group w-full h-[35vh] bg-zinc-900 rounded-xl overflow-hidden shadow-lg hover:scale-105 transition-transform duration-300">
+  <button
+    onClick={onFavoriteClick}
+    className="absolute top-3 right-3 z-10 text-3xl text-white hover:scale-110 transition-transform"
+  >
+    {favorite ? "❤" : "🤍"}
+  </button>
+  <img
+    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+    alt="Movie Poster"
+    className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-105"
+  />
+</div>
+
     </Link>
   );
 }

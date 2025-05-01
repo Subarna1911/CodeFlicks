@@ -13,14 +13,7 @@ export default function App() {
     <>
      <SearchProvider>
       <MovieProvider>
-        <Navbar />
-        <div className="flex justify-around items-center">
-        <GenreSection />
-        <GenreSection />
-        <GenreSection />
-        <GenreSection />
-        </div>
-      
+        <Navbar />    
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/watchlist' element={<Watchlist />} />
