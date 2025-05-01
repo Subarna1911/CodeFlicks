@@ -8,12 +8,15 @@ import { SearchProvider } from './contexts/SearchContext';
 import MovieDetail from './pages/MovieDetails';
 import GenreSection from "./components/GenreSection";
 
+
+
 export default function App() {
   return (
     <>
+   
      <SearchProvider>
       <MovieProvider>
-        <Navbar />    
+        <Navbar /> 
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/watchlist' element={<Watchlist />} />

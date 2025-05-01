@@ -63,7 +63,7 @@ export const SearchProvider = ({ children }) => {
 
   const handleGenreSelect = async (genreId) => {
     setSelectedGenre(genreId);
-    setQuery(''); // clear search when filtering by genre
+    setQuery(''); 
     setSuggestions([]);
     const filtered = await filterMoviesByGenre(genreId);
     setMovies(filtered);
