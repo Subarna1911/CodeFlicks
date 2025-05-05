@@ -1,1 +1,1 @@
-Weatherly is a modern weather app built using React.js that fetches real-time weather data from a public API. It provides users with current weather conditions, temperature, humidity, wind speed.
+CodeFlicks is a simple and user-friendly movie web app built with React. It lets you search for movies, explore their details like ratings and descriptions, and even helps you decide where to watch them by showing available platforms. Whether you're just browsing or looking for something specific, CodeFlicks makes movie discovery quick and easy
