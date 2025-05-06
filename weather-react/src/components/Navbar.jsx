@@ -14,7 +14,7 @@ export default function Navbar() {
 
   return (
     <div className="sticky top-0 z-50">
-      <nav className="bg-slate-950 text-white p-6 flex flex-col md:flex-row justify-between items-center">
+      <nav className="top-0 left-0 w-full z-50 text-black p-6 flex justify-between items-center bg-white/30 backdrop-blur-lg">
         <div className="text-3xl font-bold mb-2 md:mb-0">
           <Link to="/" className="hover:cursor-pointer" onClick={handleHomeClick}>CatFlex</Link>
         </div>

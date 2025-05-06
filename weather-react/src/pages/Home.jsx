@@ -1,7 +1,7 @@
 import MovieGrid from '../components/MovieGrid';
 import { useEffect } from 'react';
 import { useSearch } from '../contexts/SearchContext';
-import SliderBanner from '../components/SliderBanner';
+import SliderSwiper from '../components/SliderSwiper';
 
 export default function Home() {
   const { movies, loading, loadDefaultMovies } = useSearch();
@@ -12,7 +12,13 @@ export default function Home() {
 
   return (
     <>
-       <SliderBanner/>     
+         {/* <div>
+      {movies.length > 0 ? (
+        <SliderSwiper movies={movies.slice(4, 9)} />
+      ) : (
+        <div className="text-white text-center">Loading banners...</div>
+      )}
+    </div> */}
       {loading ? (
         <p className="text-center text-purple-600 font-semibold">Loading...</p>
       ) : (

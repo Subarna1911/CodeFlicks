@@ -1,1 +1,29 @@
 @import "tailwindcss";
+
+.swiper-button-prev:after{
+    color: #0000008f;
+    font-size: 1rem!important;
+    font-weight: 600;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 50%;
+    margin-left: 2rem;
+    height: 50px;
+    width: 50px;
+}
+
+.swiper-button-next:after {
+    color: #0000008f;
+    font-size: 1rem !important ;
+    font-weight: 600;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 50%;
+    margin-right: 2rem;
+    height: 50px;
+    width: 50px;
+}
+
+body{
+    background-color: #f5f5f7;
+}
